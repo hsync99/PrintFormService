@@ -7,19 +7,22 @@ namespace PrintFormService.Controllers
         IPrintService _printservice;
         public PrintController(IPrintService printservice)
         {
-            _printservice = _printservice;
+            _printservice = printservice;
         }
         [HttpPost]
         [Route("Print")]
-        public async Task<IActionResult> Print(IFormFile htmlfile, string JsonData)
+        public async Task<IActionResult> Print(IFormFile pdfFile, string JsonData)
         {
-            var filePath = Path.GetFullPath(htmlfile.FileName);
+            var filePath = Path.GetFullPath(pdfFile.FileName);
             using (var stream = System.IO.File.Create(filePath))
             {
-                await htmlfile.CopyToAsync(stream);
+                await pdfFile.CopyToAsync(stream);
             }
-            var result = await _printservice.ExportTemplate(filePath, JsonData);    
-            return Ok("");
+            var result = await _printservice.ExportTemplate(filePath, JsonData);
+            string outfile = Path.GetFullPath(result);
+            byte[] filecontent = System.IO.File.ReadAllBytes(outfile);
+
+            return File(filecontent, "application/pdf", result);
         }
     }
 }
