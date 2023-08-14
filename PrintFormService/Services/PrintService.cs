@@ -16,17 +16,24 @@ namespace PrintFormService.Services
            Document document= new Document();
             document.LoadFromFile(inputfilename);
             Section section = document.Sections[0];
+
+            
             Paragraph para1 = section.Paragraphs[0];
-            para1.Text = "Spire.Doc for .NET Introduction";
+            if (para1.Text.Contains("[REG_DATE]"))
+            {
+                para1.Text = "Дата регистрации:" + DateTime.Now.ToString();
+            }
+            
 
             //Add New Text
-            Paragraph para2 = section.Paragraphs[1];
-            TextRange tr = para2.AppendText("Spire.Doc for .NET is stand-alone"
-            + "to enables developers to operate Word witout Microsoft Word installed.");
-            tr.CharacterFormat.FontName = "Cataneo BT";
-            tr.CharacterFormat.FontSize = 12;
-            tr.CharacterFormat.TextColor = Color.YellowGreen;
+            //Paragraph para2 = section.Paragraphs[1];
+            //TextRange tr = para2.AppendText("Spire.Doc for .NET is stand-alone"
+            //+ "to enables developers to operate Word witout Microsoft Word installed.");
+            //tr.CharacterFormat.FontName = "Cataneo BT";
+            //tr.CharacterFormat.FontSize = 12;
+            //tr.CharacterFormat.TextColor = Color.YellowGreen;
 
+            
             //Save and Launch
             document.SaveToFile("Edit Word.docx", FileFormat.Docx);
             return "Edit Word.docx";

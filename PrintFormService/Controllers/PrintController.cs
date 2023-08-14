@@ -22,7 +22,7 @@ namespace PrintFormService.Controllers
             string outfile = Path.GetFullPath(result);
             byte[] filecontent = System.IO.File.ReadAllBytes(outfile);
 
-            return File(filecontent, "application/pdf", result);
+            return File(filecontent, "application/msword", result);
         }
     }
 }
