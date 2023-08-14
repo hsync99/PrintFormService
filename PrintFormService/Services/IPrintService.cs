@@ -2,6 +2,6 @@
 {
     public interface IPrintService
     {
-        Task<string> ExportTemplate(string filepath, string JsonData);
+        Task<string> ExportTemplate(string filepath, string json);
     }
 }
