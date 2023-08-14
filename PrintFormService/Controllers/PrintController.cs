@@ -10,13 +10,13 @@ namespace PrintFormService.Controllers
             _printservice = printservice;
         }
         [HttpPost]
-        [Route("Print")]
-        public async Task<IActionResult> Print(IFormFile pdfFile, string JsonData)
+        [Route("print")]
+        public async Task<IActionResult> Print(IFormFile filepath, string JsonData)
         {
-            var filePath = Path.GetFullPath(pdfFile.FileName);
+            var filePath = Path.GetFullPath(filepath.FileName);
             using (var stream = System.IO.File.Create(filePath))
             {
-                await pdfFile.CopyToAsync(stream);
+                await filepath.CopyToAsync(stream);
             }
             var result = await _printservice.ExportTemplate(filePath, JsonData);
             string outfile = Path.GetFullPath(result);
