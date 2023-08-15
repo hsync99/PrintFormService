@@ -21,6 +21,10 @@ namespace PrintFormService.Controllers
             var result = await _printservice.ExportTemplate(filePath, JsonData);
             string outfile = Path.GetFullPath(result);
             byte[] filecontent = System.IO.File.ReadAllBytes(outfile);
+            var lastfilePath = Path.GetFullPath(result);
+            //System.IO.File.Delete(filePath);
+           // System.IO.File.Delete(lastfilePath);
+
 
             return File(filecontent, "application/msword", result);
         }

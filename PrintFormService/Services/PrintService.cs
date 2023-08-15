@@ -18,30 +18,38 @@ namespace PrintFormService.Services
       
             Section section = document.Sections[0];
             var jdata = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-            int i = 0;
+           var header= section.HeadersFooters[0];
+            var header2 = section.HeadersFooters.Header.LastParagraph.Text;
+            section.HeadersFooters.Header.LastParagraph.Text = "Колонтитул";
+            //header.Paragraphs[0].Text = "КОЛОНТИТУЛ";
             int j = 0;
-            foreach (var item in jdata)
+            var c = section.Paragraphs.Count;
+            for (int i = 0; i < c;i++)
             {
-
-
-                Paragraph para1 = section.Paragraphs[i];
-                if (para1.Text.Contains(item.Key))
+                foreach (var item in jdata)
                 {
-                    string text = para1.Text;
-                    text = text.Replace(item.Key, item.Value);
-                    para1.Text = text;
+
+
+                    Paragraph para1 = section.Paragraphs[i];
+                    
+
+                    if (para1.Text.Contains(item.Key))
+                    {
+                        string text = para1.Text;
+                        text = text.Replace(item.Key, item.Value);
+                        para1.Text = "";
+                        TextRange tr = para1.AppendText(text); 
+                       
+                        tr.CharacterFormat.FontName = "TimesNewRoman";
+                        tr.CharacterFormat.FontSize = 12;
+                        tr.CharacterFormat.TextColor = Color.Red;
+                      
+                    }
+                   
+
                 }
-                //else
-                //{
-                //    for (j = i; para1.Text.Contains(item.Key); j++)
-                //    {
-                //        para1= section.Paragraphs[j];
-                //    }
-                //}
-
-
-                i++;
             }
+           
            
             
 
