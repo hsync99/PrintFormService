@@ -25,7 +25,7 @@ namespace PrintFormService.Services
            
             int j = 0;
             var c = section.Paragraphs.Count;
-            var t = section.Tables[0].Rows[0].Cells[0].Paragraphs[1].Text;
+            //var t = section.Tables[0].Rows[0].Cells[0].Paragraphs[1].Text;
    
             for (int i = 0; i < c;i++)
             {
@@ -38,11 +38,12 @@ namespace PrintFormService.Services
                         {
                         string text = para1.Text;
                         text = text.Replace(item.Key, item.Value);
-                        para1.Text = "";
-                        TextRange tr = para1.AppendText(text);                        
-                        tr.CharacterFormat.FontName = "TimesNewRoman";
-                        tr.CharacterFormat.FontSize = 12;
-                        tr.CharacterFormat.TextColor = Color.Red;                      
+                        para1.Text = text;
+                        //TextRange tr = para1.AppendText(text);
+                        //var fontsize = tr.CharacterFormat.FontSize;
+                        //tr.CharacterFormat.FontName = "TimesNewRoman";
+                        //tr.CharacterFormat.FontSize = fontsize;
+                        //tr.CharacterFormat.TextColor = Color.Red;                      
                         }
                    
 
