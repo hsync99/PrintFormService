@@ -22,11 +22,15 @@ namespace PrintFormService.Services
            // var header2 = section.HeadersFooters.Header.LastParagraph.Text;
             //section.HeadersFooters.Header.LastParagraph.Text = "Колонтитул";
             //header.Paragraphs[0].Text = "КОЛОНТИТУЛ";
+           
             int j = 0;
             var c = section.Paragraphs.Count;
+            var t = section.Tables[0].Rows[0].Cells[0].Paragraphs[1].Text;
+   
             for (int i = 0; i < c;i++)
             {
                 Paragraph para1 = section.Paragraphs[i];
+                
                 foreach (var item in jdata)
                 {
                                     
@@ -44,6 +48,10 @@ namespace PrintFormService.Services
 
                 }
             }
+           
+
+            
+
            
            
             
@@ -63,5 +71,7 @@ namespace PrintFormService.Services
             
         }
 
+
+       
     }
 }
