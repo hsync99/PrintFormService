@@ -19,32 +19,27 @@ namespace PrintFormService.Services
             Section section = document.Sections[0];
             var jdata = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
            var header= section.HeadersFooters[0];
-            var header2 = section.HeadersFooters.Header.LastParagraph.Text;
-            section.HeadersFooters.Header.LastParagraph.Text = "Колонтитул";
+           // var header2 = section.HeadersFooters.Header.LastParagraph.Text;
+            //section.HeadersFooters.Header.LastParagraph.Text = "Колонтитул";
             //header.Paragraphs[0].Text = "КОЛОНТИТУЛ";
             int j = 0;
             var c = section.Paragraphs.Count;
             for (int i = 0; i < c;i++)
             {
+                Paragraph para1 = section.Paragraphs[i];
                 foreach (var item in jdata)
                 {
-
-
-                    Paragraph para1 = section.Paragraphs[i];
-                    
-
-                    if (para1.Text.Contains(item.Key))
-                    {
+                                    
+                        if (para1.Text.Contains(item.Key))
+                        {
                         string text = para1.Text;
                         text = text.Replace(item.Key, item.Value);
                         para1.Text = "";
-                        TextRange tr = para1.AppendText(text); 
-                       
+                        TextRange tr = para1.AppendText(text);                        
                         tr.CharacterFormat.FontName = "TimesNewRoman";
                         tr.CharacterFormat.FontSize = 12;
-                        tr.CharacterFormat.TextColor = Color.Red;
-                      
-                    }
+                        tr.CharacterFormat.TextColor = Color.Red;                      
+                        }
                    
 
                 }
